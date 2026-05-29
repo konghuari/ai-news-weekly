@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 新闻速递 · 2026.05.29</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #0a0e27;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    /* 顶部导航 */
+    .top-bar {
+      background: rgba(0,0,0,0.8);
+      border-bottom: 1px solid rgba(255,215,0,0.2);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .top-bar .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .top-bar .brand .tag {
+      background: #ff0044;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 2px;
+    }
+    .top-bar .brand h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ccc;
+    }
+    .top-bar .date {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* 封面图区域 */
+    .cover-section {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .cover-section img {
+      width: 100%;
+      display: block;
+      max-height: 80vh;
+      object-fit: contain;
+      background: #0d0d2b;
+    }
+
+    /* 标题区域 */
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(255,215,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title .icon { font-size: 28px; }
+
+    /* 卡片网格 */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,215,0,0.3);
+      transform: translateY(-2px);
+    }
+    .card .card-icon { font-size: 36px; margin-bottom: 12px; }
+    .card h3 {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.6;
+    }
+    .card .badge {
+      display: inline-block;
+      background: rgba(255,215,0,0.15);
+      color: #ffd700;
+      font-size: 12px;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    /* 音频播放器 */
+    .audio-player {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .audio-player .audio-label {
+      font-size: 16px;
+      color: #ccc;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .audio-player audio { width: 100%; }
+
+    /* 口播稿 */
+    .script-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+      line-height: 2;
+      font-size: 16px;
+      color: #ccc;
+      white-space: pre-wrap;
+    }
+
+    /* 下载按钮 */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: rgba(255,215,0,0.1);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 10px;
+      color: #ffd700;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .download-btn:hover {
+      background: rgba(255,215,0,0.2);
+      border-color: #ffd700;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px;
+      color: #444;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer a { color: #666; text-decoration: none; }
+    .footer a:hover { color: #ffd700; }
+
+    @media (max-width: 640px) {
+      .top-bar { padding: 12px 16px; flex-direction: column; gap: 4px; }
+      .top-bar .date { font-size: 12px; }
+      .container { padding: 20px 12px; }
+      .section-title { font-size: 22px; }
+      .cards { grid-template-columns: 1fr; }
+      .script-box { padding: 20px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <div class="top-bar">
+    <div class="brand">
+      <span class="tag">头条</span>
+      <h1>AI 新闻速递</h1>
+    </div>
+    <span class="date">2026 年 5 月 29 日</span>
+  </div>
+
+  <div class="container">
+
+    <!-- 封面图 -->
+    <div class="cover-section">
+      <img src="gpt-ai-news-cover.png" alt="AI新闻封面 - 马斯克诉OpenAI">
+    </div>
+
+    <!-- 内容卡片 -->
+    <div class="section-title">
+      <span class="icon">📋</span> 本期内容
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🎙️</div>
+        <h3>1 分钟口播稿</h3>
+        <p>围绕本周五大 AI 热点事件撰写，时长约 1 分钟，适合短视频口播。</p>
+        <span class="badge">约 400 字</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔊</div>
+        <h3>语音音频</h3>
+        <p>使用 Microsoft Edge TTS 生成，中文女声「晓晓」温暖播报风格。</p>
+        <span class="badge">MP3 · 372 KB</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎬</div>
+        <h3>短视频封面</h3>
+        <p>gpt-image-2 生成的竖版封面图，9:16 比例，适合抖音/视频号/Reels。</p>
+        <span class="badge">1024×1536 · PNG</span>
+      </div>
+    </div>
+
+    <!-- 本期新闻速览 -->
+    <div class="section-title">
+      <span class="icon">📰</span> 本周 AI 新闻
+    </div>
+
+    <div class="cards">
+      <div class="card" style="border-left: 3px solid #ff6b35;">
+        <div class="card-icon">⚖️</div>
+        <h3>马斯克诉 OpenAI 案败诉</h3>
+        <p>法院判决 OpenAI 胜诉，结果可能影响整个 AI 行业的权力格局。</p>
+      </div>
+      <div class="card" style="border-left: 3px solid #ff0044;">
+        <div class="card-icon">🏛️</div>
+        <h3>特朗普叫停 AI 行政令</h3>
+        <p>科技巨头 CEO 游说后，原拟的 AI 安全审查框架被紧急叫停。</p>
+      </div>
+      <div class="card" style="border-left: 3px solid #00d4aa;">
+        <div class="card-icon">🧮</div>
+        <h3>AI 数学历史性突破</h3>
+        <p>AI 在国际数学奥林匹克夺金，推翻 80 年未解猜想。</p>
+      </div>
+      <div class="card" style="border-left: 3px solid #ffd700;">
+        <div class="card-icon">💾</div>
+        <h3>AI 芯片热潮持续</h3>
+        <p>英伟达、SK 海力士、美光在 AI 芯片浪潮下市值突破万亿。</p>
+      </div>
+      <div class="card" style="border-left: 3px solid #4a9eff;">
+        <div class="card-icon">🚗</div>
+        <h3>欧洲首辆 Robotaxi 上线</h3>
+        <p>克罗地亚 Verne 公司推出欧洲首辆无人驾驶出租车。</p>
+      </div>
+    </div>
+
+    <!-- 音频播放 -->
+    <div class="section-title">
+      <span class="icon">🔊</span> 语音播放
+    </div>
+    <div class="audio-player">
+      <div class="audio-label">▶️ 点击播放 — AI 新闻速递（1 分钟）</div>
+      <audio controls>
+        <source src="ai-news-voice.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+      </audio>
+    </div>
+
+    <!-- 口播稿 -->
+    <div class="section-title">
+      <span class="icon">📝</span> 口播文稿
+    </div>
+    <div class="script-box" id="scriptText">大家好，欢迎收听今天的 AI 新闻速递。
+
+本周最大的新闻，莫过于埃隆·马斯克起诉 OpenAI 一案尘埃落定——法院判决 OpenAI 胜诉。这场官司的结果，很可能影响整个 AI 行业的权力格局。
+
+与此同时，美国总统特朗普在多家科技巨头 CEO 的游说下，突然叫停了原计划签署的 AI 安全行政令，引发业界广泛讨论。
+
+在技术前沿，AI 在数学领域取得了历史性突破：不仅在国际数学奥林匹克中拿到金牌，甚至推翻了一个存在了 80 年的数学猜想，让数学家们惊叹不已。
+
+另外，英伟达继续押注下一代数据中心芯片，SK 海力士和美光也在 AI 芯片热潮中市值突破万亿美元大关。
+
+最后，克罗地亚的 Verne 公司在欧洲推出了首辆无人驾驶出租车，标志着自动驾驶在欧洲迈出了实质性的一步。
+
+以上就是本周的 AI 新闻速递，我们下期再见！</div>
+
+    <!-- 下载区 -->
+    <div class="section-title">
+      <span class="icon">⬇️</span> 下载资源
+    </div>
+    <div class="download-grid">
+      <a class="download-btn" href="gpt-ai-news-cover.png" download>
+        🖼️ 下载封面图
+      </a>
+      <a class="download-btn" href="ai-news-voice.mp3" download>
+        🎵 下载音频
+      </a>
+      <a class="download-btn" href="ai-news-script.txt" download>
+        📄 下载文稿
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/konghuari/ai-news-weekly" target="_blank">GitHub</a>
+    &nbsp;·&nbsp; 由 GPT-Image-2 &amp; Edge-TTS 生成 &nbsp;·&nbsp; AI 新闻速递
+  </div>
+
+</body>
+</html>
